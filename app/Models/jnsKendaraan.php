@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class jnsKendaraan extends Model
+class jenisKendaraan extends Model
 {
     use HasFactory;
-    protected $table = 'jns_kendaraan';
+    protected $table = 'jenis_kendaraan';
 
     protected $fillable = [
-        'id_jns_kendaraan',
+        'id',
         'nm_jns_kendaraan',
-        
     ];
 }

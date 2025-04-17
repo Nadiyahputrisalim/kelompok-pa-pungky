@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\jenisKendaraan;
+use App\Models\jns_service;
 use Illuminate\Http\Request;
 
-class JnsKendaraanController extends Controller
+class JnsServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +13,8 @@ class JnsKendaraanController extends Controller
     public function index()
     {
         //
-        $data = jenisKendaraan::get();
-        return view('jnsKendaraan.tampilJnsKendaraan', compact('data'));
+        $data = jns_service::get();
+        return view('jnsService.tampilJnsService', compact('data'));
     }
 
     /**
@@ -23,7 +23,7 @@ class JnsKendaraanController extends Controller
     public function create()
     {
         //
-        return view('jnsKendaraan.tambahJnsKendaraan');
+        return view('jnsService.tambahJnsService');
     }
 
     /**
@@ -31,11 +31,12 @@ class JnsKendaraanController extends Controller
      */
     public function store(Request $request)
     {
-        //untuk meniympan data ke database
-        $data = new jenisKendaraan();
-        $data->nm_jns_kendaraan = $request->nm_jns_kendaraan;
-        $data->save();
-        return redirect('jnskendaraan');
+        //
+        $data = new jns_service();
+        $data->jns_service = $request->jns_service;
+        $data->keterangan = $request->keterangan;
+        $post = $data->save();
+        return redirect('jenisservice');
     }
 
     /**
@@ -44,8 +45,8 @@ class JnsKendaraanController extends Controller
     public function edit(string $id)
     {
         //
-        $data = jenisKendaraan::where('id', '=', $id)->get();
-        return view('jnsKendaraan.editJnsKendaraan', compact('data', 'id'));
+        $data = jns_service::where('id', '=', $id)->get();
+        return view('jnsService.editJnsService', compact('data', 'id'));
     }
 
     /**
@@ -54,11 +55,12 @@ class JnsKendaraanController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $data = jenisKendaraan::where('id', '=', $id);
+        $data = jns_service::where('id', '=', $id);
         $data->update([
-            'nm_jns_kendaraan' => $request->nm_jns_kendaraan
+            'jns_service' => $request->jns_service,
+            'keterangan' => $request->keterangan,
         ]);
-        return redirect('jnskendaraan');
+        return redirect('jenisservice');
     }
 
     /**
@@ -67,8 +69,8 @@ class JnsKendaraanController extends Controller
     public function destroy(string $id)
     {
         //
-        $data = jenisKendaraan::where('id', '=', $id);
+        $data = jns_service::where('id', '=', $id);
         $data->delete();
-        return redirect('jnskendaraan');
+        return redirect('jenisservice');
     }
 }
